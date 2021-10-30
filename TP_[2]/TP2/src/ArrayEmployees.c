@@ -197,7 +197,7 @@ int modificarEmpleado (Employee* pListaEmpleados, int tam)
         	retorno = 0;
         	do
         	{
-			if(utn_getNumero(&respuesta, "\nIngrese lo que desea cambiar.\n1)Nombre.\n2)Apellido.\n3)Salario.\n4)Sector.\n5)Nada más.\n\nIngrese una opción: ", "\nNo es una opción válida\n", 1,5,4) == 0)
+			if(utn_getNumero(&respuesta, "\nIngrese lo que desea cambiar.\n1)Nombre.\n2)Apellido.\n3)Salario.\n4)Sector.\n5)Nada mas.\n\nIngrese una opcion: ", "\nNo es una opcion valida\n", 1,5,4) == 0)
 			{
 				switch(respuesta)
 				{
