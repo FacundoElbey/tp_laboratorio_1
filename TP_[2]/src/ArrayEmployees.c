@@ -1,11 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "TP2.H"
 #include "ArrayEmployees.h"
-#define TAM 1000
-#define TRUE 1
-#define FALSE 0
 
 /***
  * \fn int getEmptyIndex(Employee*, int)
@@ -15,15 +9,15 @@
  * \param tam la cantidad de empleados
  * \return retorna -1 como error y sino retorna el ID
  */
-int getEmptyIndex(Employee* listaEmpleados,int tam)
+int getEmptyIndex(Employee* plistaEmpleados,int tam)
 {
 	int retorno = -1;
 	int i;
-	if(listaEmpleados != NULL && tam > 0)
+	if(plistaEmpleados != NULL && tam > 0)
 	{
 		for(i=0;i<tam;i++)
 		{
-			if(listaEmpleados[i].isEmpty == 1)
+			if(plistaEmpleados[i].isEmpty == TRUE)
 			{
 				retorno = i;
 				break;
@@ -43,13 +37,13 @@ int getEmptyIndex(Employee* listaEmpleados,int tam)
  * \param indice el indice del array (la posicion)
  * \return retorna -1 en caso de error y 0 en caso de exito
  */
-int pedirDatosParaElAlta(Employee* bufferEmpleados, int* id, int tam, int indice) //BIEN HECHA YA
+int pedirDatosParaElAlta(Employee* bufferEmpleados, int* id, int tam, int indice)
 {
 	int retorno = -1;
+
 	if(bufferEmpleados != NULL && indice < tam)
 	{
 		retorno = 0;
-		fflush(stdin);
 		utn_getNombre(bufferEmpleados[indice].name, 51, "\nIngrese el nombre del empleado: ", "\nNombre inválido.",2);
 		utn_getNombre(bufferEmpleados[indice].lastName, 51, "\nIngrese el apellido del empleado: ", "\nApellido inválido",2);
 		utn_getNumeroFlotante(&bufferEmpleados[indice].salary,"\nIngrese el salario del empleado: ","\nEl salario es inválido, intente de nuevo.",0.01,10000000,2);
@@ -76,7 +70,7 @@ free space] - (0) if Ok
 int addEmployee(Employee* pListaDeEmpleados, int tam, int id, char name[],char lastName[],float salary,int sector) //BIEN HECHA YA
 {
 	int retorno = -1;
-	if(pListaDeEmpleados != NULL)
+	if(pListaDeEmpleados != NULL && id != 0)
 	{
 		retorno = 0;
 		pListaDeEmpleados[id].isEmpty = FALSE;
@@ -92,45 +86,22 @@ int addEmployee(Employee* pListaDeEmpleados, int tam, int id, char name[],char l
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 *
 */
-int initEmployees(Employee* listaEmpleados, int tam) //BIEN HECHA YA
+int initEmployees(Employee* pListaEmpleados, int tam)
 {
 	int retorno =  -1;
 	int i;
-	if(listaEmpleados != NULL && tam > 0)
+	if(pListaEmpleados != NULL && tam > 0)
 	{
 		setbuf(stdout, NULL);
 		retorno = 0;
 		for(i=0; i<tam; i++)
 		{
-			listaEmpleados[i].isEmpty = TRUE;
+			pListaEmpleados[i].isEmpty = TRUE;
 		}
 	}
 	return retorno;
 }
 
-/** \brief print the content of employees array
-*
-* \param list Employee*
-* \param length int
-* \return int
-*
-*/
-int printEmployees(Employee* listaEmpleados, int tam) //BIEN HECHO YA
-{
-	int retorno = -1;
-	int i;
-    if(listaEmpleados != NULL && tam > 0)
-    {
-    	retorno = 0;
-
-    	for(i=0; i<tam; i++)
-    	{
-    		printEmployee(&listaEmpleados[i]);
-    	}
-    }
-
-	return retorno;
-}
 /***
  * \fn int printEmployee(Employee*)
  * \brief imprime 1 elemento del array
@@ -147,6 +118,28 @@ int printEmployee (Employee* pEmpleado)
 		retorno = 0;
 		printf("\nID: %d - NOMBRE: %s - APELLIDO: %s - SALARIO: $%.2f - SECTOR: %d", pEmpleado->id, pEmpleado->name, pEmpleado->lastName, pEmpleado->salary, pEmpleado->sector);
 	}
+	return retorno;
+}
+
+/** \brief print the content of employees array
+*
+* \param list Employee*
+* \param length int
+* \return int
+*
+*/
+int printEmployees(Employee* pListaEmpleados, int tam)
+{
+	int retorno = -1;
+
+	for (int i = 0; i < tam ; i++)
+	{
+		if(pListaEmpleados[i].isEmpty == FALSE)
+		{
+			printEmployee(&pListaEmpleados[i]);
+		}
+	}
+
 	return retorno;
 }
 
@@ -211,20 +204,20 @@ int removeEmployee(Employee* listaEmpleados, int tam, int id) //BIEN HECHO
  * \param tam tamaño del array
  * \return retorna -1 en caso de error y 0 en caso de exito
  */
-int modificarEmpleado (Employee* listaEmpleados, int tam)
+int modificarEmpleado (Employee* pListaEmpleados, int tam)
 {
 	int retorno = -1;
 	int IdEmpleado;
 	int respuesta;
 
-	printEmployees(listaEmpleados, tam);
+	printEmployees(pListaEmpleados, tam);
 
 	utn_getNumero(&IdEmpleado, "\nIngrese el ID del empleado a modificar: ", "\nError.", 0 , 10000,4);
 
 
       for(int i = 0 ; i < tam ; i++){
 
-        if(listaEmpleados[i].isEmpty != TRUE && listaEmpleados[i].id == IdEmpleado)
+        if(pListaEmpleados[i].isEmpty != TRUE && pListaEmpleados[i].id == IdEmpleado)
         {
         	retorno = 0;
         	do
@@ -234,16 +227,16 @@ int modificarEmpleado (Employee* listaEmpleados, int tam)
         			switch(respuesta)
         			{
         			case 1:
-        				utn_getNombre(listaEmpleados[i].name, 51, "\nIngrese el nombre del empleado: ", "\nNombre inválido.",2);
+        				utn_getNombre(pListaEmpleados[i].name, 51, "\nIngrese el nombre del empleado: ", "\nNombre invalido.",2);
         				break;
         			case 2:
-        				utn_getNombre(listaEmpleados[i].lastName, 51, "\nIngrese el apellido del empleado: ", "\nApellido inválido.",2);
+        				utn_getNombre(pListaEmpleados[i].lastName, 51, "\nIngrese el apellido del empleado: ", "\nApellido invalido.",2);
         				break;
         			case 3:
-        				utn_getNumeroFlotante(&listaEmpleados[i].salary,"\nIngrese el salario del empleado: ","\nEl salario es inválido, intente de nuevo.",0.01,10000000,2);
+        				utn_getNumeroFlotante(&pListaEmpleados[i].salary,"\nIngrese el salario del empleado: ","\nEl salario es invalido, intente de nuevo.",0.01,10000000,2);
         				break;
         			case 4:
-        				utn_getNumero(&listaEmpleados[i].sector, "\nIngrese el sector del trabajador: ", "El sector es inválido", 0, 1000000,2);
+        				utn_getNumero(&pListaEmpleados[i].sector, "\nIngrese el sector del trabajador: ", "El sector es invalido", 0, 1000000,2);
         				break;
         			case 5:
         				break;

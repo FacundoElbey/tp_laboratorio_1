@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ArrayEmployees.h"
-#define TAM 1000
+#define TAMCLIENTES 1001
 #define TRUE 1
 #define FALSE 0
 

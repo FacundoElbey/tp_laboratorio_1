@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "TP2.H"
-#define TAM 1000
 #define TRUE 1
 #define FALSE 0
 
