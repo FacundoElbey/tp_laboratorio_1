@@ -1,9 +1,9 @@
 #include "Biblioteca.h"
 /**
  * \brief 	Lee de stdin hasta que encuentra un '\n' o hasta que haya copiado en cadena
- * 			un máximo de 'longitud - 1' caracteres.
+ * 			un maximo de 'longitud - 1' caracteres.
  * \param pResultado Puntero al espacio de memoria donde se copiara la cadena obtenida
- * \param longitud Define el tamaño de cadena
+ * \param longitud Define el tamanio de cadena
  * \return Retorna 0 (EXITO) si se obtiene una cadena y -1 (ERROR) si no
  *
  */
@@ -33,9 +33,9 @@ int getString(char* cadena, int longitud)
 
 /**
  * \brief 	Lee de stdin hasta que encuentra un '\n' o hasta que haya copiado en cadena
- * 			un máximo de 'longitud - 1' caracteres.
+ * 			un maximo de 'longitud - 1' caracteres.
  * \param pResultado Puntero al espacio de memoria donde se copiara la cadena obtenida
- * \param longitud Define el tamaño de cadena
+ * \param longitud Define el tamanio de cadena
  * \return Retorna 0 (EXITO) si se obtiene una cadena y -1 (ERROR) si no
  *
  */

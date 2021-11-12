@@ -4,7 +4,7 @@
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 
@@ -46,7 +46,7 @@ int parser_EmployeeFromText(FILE *pFile, LinkedList *pArrayListEmployee) {
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 

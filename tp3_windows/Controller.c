@@ -4,7 +4,7 @@
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
@@ -34,7 +34,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
@@ -64,15 +64,16 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
 	int retorno = -1;
-
 	Employee* pEmpleado = NULL;
 	int id = -1;
+	int auxHorasTrabajadas;
+	int auxSueldo;
 	int respuesta;
 	char nombre[128];
 	char horasTrabajadas[100];
@@ -84,9 +85,11 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 		id = encontrarMaximoId(pArrayListEmployee);
 		itoa(id, nuevaId, 10);
 			if(!utn_getNombre(nombre, 128,"\nIngrese el nombre del empleado:","\nError!",4) &&
-				!PedirString ("\nIngrese las horas trabajadas del empleado:", horasTrabajadas) &&
-				!PedirString ("\nIngrese el salario del empleado:", salario))
+				!utn_getNumero (&auxHorasTrabajadas,"\nIngrese las horas trabajadas del empleado: ", "\n\nERROR!!\n\n",0,1000000,5) &&
+				!utn_getNumero (&auxSueldo,"\nIngrese el sueldo del empleado: ", "\n\nERROR!!\n\n",0,1000000,5))
 			{
+				itoa(auxHorasTrabajadas,horasTrabajadas,10);
+				itoa(auxSueldo,salario,10);
 				pEmpleado = employee_newParametros(nuevaId,nombre, horasTrabajadas, salario);
 				if(!cargarIdMaximo(pArrayListEmployee, id))
 				{
@@ -109,7 +112,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
@@ -133,7 +136,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
@@ -203,7 +206,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
@@ -259,7 +262,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
@@ -337,7 +340,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
@@ -387,7 +390,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  *
  * \param path char*
  * \param pArrayListEmployee LinkedList*
- * \return int
+ * \return int retorna -1 error y 0 (cero) en caso de exito
  *
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
