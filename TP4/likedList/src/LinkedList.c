@@ -95,34 +95,27 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 	Node* pNode = NULL;
 	Node* pNodeViejo = NULL;
 
+	pNode = (Node*) malloc(sizeof(Node*));
 	int len = ll_len(this);
 
-	if (this != NULL && nodeIndex >= 0 && nodeIndex < len)
+	if (this != NULL && nodeIndex >= 0 && nodeIndex <= len && pNode != NULL)
 	{
-		pNode = (Node*) malloc(sizeof(Node));
-		pNodeViejo = (Node*) malloc(sizeof(Node));
-
-		if(pNode != NULL)
-		{
+		pNode->pElement = pElement;
 			if(nodeIndex == 0) //si quiero ingresarlo al indice 0
 			{
-				pNodeViejo = getNode(this,nodeIndex);
-				pNode->pNextNode = pNodeViejo;
+				pNode->pNextNode = this->pFirstNode;
 				this->pFirstNode = pNode;
-				pNode->pElement = pElement;
 				this->size++;
-				returnAux=0;
+				returnAux = 0;
 			}
 			else //si ya hay nodos en la lista
 			{
-				pNodeViejo = getNode(this,nodeIndex);
-				pNodeViejo->pNextNode = pNode->pNextNode;
+				pNodeViejo = getNode(this,nodeIndex - 1);
+				pNode->pNextNode = pNodeViejo->pNextNode;
 				pNodeViejo->pNextNode = pNode;
-				pNode->pElement = pElement;
 				this->size++;
-				returnAux=0;
+				returnAux = 0;
 			}
-		}
 	}
 	return returnAux;
 }
@@ -182,7 +175,7 @@ void* ll_get(LinkedList* this, int index)
     len = ll_len(this);
     pNode = (Node*) malloc(sizeof(Node));
 
-    if(this !=NULL && index >= 0 && index <= len)
+    if(this !=NULL && index >= 0 && index < len)
     {
         pNode=getNode(this, index);
 
@@ -239,28 +232,30 @@ int ll_remove(LinkedList* this,int index)
     Node* pNode = NULL;
     Node* pNodeAux = NULL;
     int len;
-    int indexAux;
 
     len = ll_len(this);
 
-    if(this != NULL && index >= 0 && index <= len)
+    if(this != NULL && index >= 0 && index < len)
     {
-    	if(index == 0)
+    	pNode = getNode(this, index);
+    	if(index == 0 && pNode != NULL)
     	{
-    		pNode = getNode(this, index);
     		this->pFirstNode = pNode->pNextNode;
-    		free(pNode);
+    		this->size--;
+    		returnAux = 0;
     	}
     	else
     	{
-    		indexAux = index - 1;
-    		pNode = getNode(this, index);
-    		pNodeAux = getNode(this, indexAux);
+    		pNodeAux = getNode(this, index - 1);
     		pNodeAux->pNextNode = pNode->pNextNode;
+        	this->size--;
+        	returnAux = 0;
     		free(pNode);
     	}
-    	this->size--;
-    	returnAux = 0;
+	  if(returnAux == 0)
+	  {
+		free(pNode);
+	  }
     }
     return returnAux;
 }
@@ -281,11 +276,13 @@ int ll_clear(LinkedList* this)
 
     if(this!=NULL)
     {
-        for(int i=len; i==0; i--)
+        for(int i=0; i<len; i++)
         {
-            ll_remove(this, i);
+            if(ll_remove(this, i)==0)
+            {
+            	returnAux=0;
+            }
         }
-        returnAux=0;
     }
     return returnAux;
 }
@@ -414,14 +411,13 @@ void* ll_pop(LinkedList* this,int index)
 
     len = ll_len(this);
 
-    if(this != NULL && index >= 0 && index <= len)
+    if(this != NULL && index >= 0 && index < len)
     {
-    	pNode = (Node*) malloc(sizeof(Node));
     	pNode = getNode(this, index);
-
-    	if(pNode != NULL && ll_remove(this, index) == 0)
+    	if(pNode != NULL)
     	{
-    		returnAux = pNode;
+    		returnAux = pNode->pElement;
+    		ll_remove(this, index);
     	}
     }
     return returnAux;
@@ -439,28 +435,14 @@ void* ll_pop(LinkedList* this,int index)
 int ll_contains(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-    Node* pNode = NULL;
-    int len;
-    int contiene = 1;
 
-    len = ll_len(this);
-
-    if(this != NULL && pElement != NULL)
+    if(this != NULL)
     {
-    	for(int i=0;i<=len;i++)
-    	{
-    		pNode = getNode(this, i);
-    		if(pNode != NULL)
-    		{
-    			if(pNode->pElement==pElement)
-    			{
-    				returnAux = 1;
-    				contiene = 0;
-    				break;
-    			}
-    		}
-    	}
-    	if(contiene)
+    	if(ll_indexOf(this, pElement) >= 0)
+		{
+    		returnAux = 1;
+		}
+    	else
     	{
     		returnAux = 0;
     	}
@@ -480,32 +462,31 @@ int ll_contains(LinkedList* this, void* pElement)
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
     int returnAux = -1;
-    int flag = 0;
     int len;
-    Node* pNodeList2 = NULL;
 
-    pNodeList2 = (Node*) malloc(sizeof(Node));
     len = ll_len(this2);
 
     if(this != NULL && this2 != NULL)
     {
-    	for (int i=0; i<len; i++)
+    	if(len == 0)
+    	{
+    		returnAux = 0;
+    	}
+
+		for (int i=0; i<len; i++)
 		{
-    		pNodeList2 = ll_get(this2,i);
-			if ((ll_contains(this, pNodeList2))==1)
+			if (ll_contains(this, ll_get(this2,i)) == 1)
 			{
-				flag++;
+				returnAux = 1;
+			}
+			else
+			{
+				returnAux = 0;
+				break;
 			}
 		}
-		if (flag == len)
-		{
-			returnAux = 1;
-		}
-		else
-		{
-			returnAux=0;
-		}
     }
+
     return returnAux;
 }
 
