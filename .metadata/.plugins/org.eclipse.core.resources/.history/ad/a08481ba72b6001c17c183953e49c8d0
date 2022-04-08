@@ -1,0 +1,19 @@
+/*
+ * Funciones.c
+ *
+ *  Created on: 7 abr. 2022
+ *      Author: felbey
+ */
+#include "Funciones.h"
+
+float CalcularPrecioDebito(float precio)
+{
+	float resultado;
+	resultado = 0;
+
+	resultado = precio - precio * 0.10;
+
+	return resultado;
+}
+
+
