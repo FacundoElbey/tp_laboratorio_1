@@ -12,3 +12,25 @@ gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_[1].o" "..\\src\\TP_[1].c"
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn.o" "..\\src\\utn.c" 
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Funciones.o" "..\\src\\Funciones.c" 
 gcc -o TP_[1].exe "src\\Funciones.o" "src\\TP_[1].o" "src\\utn.o" 
+10:56:42 **** Rebuild of configuration Debug for project TP_[1] ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_[1].o" "..\\src\\TP_[1].c" 
+..\src\TP_[1].c: In function 'main':
+..\src\TP_[1].c:47:11: warning: unknown conversion type character ')' in format [-Wformat=]
+    printf("\n3. Calcular todos los costos:"
+           ^
+..\src\TP_[1].c:47:11: warning: unknown conversion type character ')' in format [-Wformat=]
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn.o" "..\\src\\utn.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Funciones.o" "..\\src\\Funciones.c" 
+gcc -o TP_[1].exe "src\\Funciones.o" "src\\TP_[1].o" "src\\utn.o" 
+Info: Nothing to build for TP_[1]
+10:59:17 **** Incremental Build of configuration Debug for project TP_[1] ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_[1].o" "..\\src\\TP_[1].c" 
+..\src\TP_[1].c: In function 'main':
+..\src\TP_[1].c:47:11: warning: unknown conversion type character ')' in format [-Wformat=]
+    printf("\n3. Calcular todos los costos:"
+           ^
+..\src\TP_[1].c:47:11: warning: unknown conversion type character ')' in format [-Wformat=]
+gcc -o TP_[1].exe "src\\Funciones.o" "src\\TP_[1].o" "src\\utn.o" 
+Info: Nothing to build for TP_[1]

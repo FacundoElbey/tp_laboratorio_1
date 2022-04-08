@@ -129,7 +129,19 @@ int main(void) {
 						break;
 
 					case 5:
-
+						kilometrosIngresados = 7090;
+						precioAerolineas = 1335000.66;
+						precioLatam = 1350000.76;
+						if (!calcularPrecioDebito(precioLatam, &precioLatamDebito) && !calcularPrecioDebito(precioAerolineas, &precioAerolineasDebito) && !calcularPrecioCredito(precioLatam, &precioLatamCredito)
+							&& !calcularPrecioCredito(precioAerolineas, &precioAerolineasCredito) && !calcularPrecioBitcoin(precioLatam, BITCOIN, &precioLatamBitcoin) &&
+							!calcularPrecioBitcoin(precioAerolineas, BITCOIN, &precioAerolineasBitcoin) && !calcularPrecioUnitario(kilometrosIngresados, precioLatam, &precioLatamUnitario) &&
+							!calcularPrecioUnitario(kilometrosIngresados, precioAerolineas, &precioAerolineasUnitario) && !calcularDiferenciaPrecios(precioAerolineas, precioLatam, &diferenciaPrecios))
+						{
+							printf("\nSe realizo con exito el calculo de los costos!!\n");
+							flag_1 = 0;
+							flag_2 = 0;
+							flag_3 = 0;
+						}
 						break;
 					case 6:
 						break;
