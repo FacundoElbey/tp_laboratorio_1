@@ -45,8 +45,8 @@ int main(void) {
 					"\n- Precio vuelo Aerolineas: %.2f"
 					"\n- Precio vuelo Latam: %.2f", precioAerolineas, precioLatam);
 			printf("\n3. Calcular todos los costos:"
-					"\na) Tarjeta de debito (descuento 10%)"
-					"\nb) Tarjeta de credito (interes 25%)"
+					"\na) Tarjeta de debito (descuento 10)"
+					"\nb) Tarjeta de credito (interes 25)"
 					"\nc) Bitcoin (1BTC -> 4606954.55 Pesos Argentinos)"
 					"\nd) Mostrar precio por km (precio unitario)"
 					"\ne) Mostrar diferencia de precio ingresada (Latam - Aerolineas)");
@@ -109,7 +109,7 @@ int main(void) {
 					case 4:
 						if(!flag_3)
 						{
-							printf("\n4.\nLatam:"
+							printf("\nLatam:"
 									"\na) Precio con tarjeta de debito: $%.2f"
 									"\nb) Precio con tarjeta de credito: $%.2f"
 									"\nc) Precio pagando con Bitcoin: %f BTC"
@@ -119,7 +119,7 @@ int main(void) {
 									"\nb) Precio con tarjeta de credito: $%.2f"
 									"\nc) Precio pagando con Bitcoin: %f BTC"
 									"\nd) Precio unitario: $%.2f"
-									"\nLa diferencia de precio es: $%.2f",precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario,
+									"\nLa diferencia de precio es: $%.2f\n",precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario,
 									precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
 						}
 						else
@@ -137,7 +137,19 @@ int main(void) {
 							!calcularPrecioBitcoin(precioAerolineas, BITCOIN, &precioAerolineasBitcoin) && !calcularPrecioUnitario(kilometrosIngresados, precioLatam, &precioLatamUnitario) &&
 							!calcularPrecioUnitario(kilometrosIngresados, precioAerolineas, &precioAerolineasUnitario) && !calcularDiferenciaPrecios(precioAerolineas, precioLatam, &diferenciaPrecios))
 						{
-							printf("\nSe realizo con exito el calculo de los costos!!\n");
+							printf("\nKMs Ingresados: %.2f"
+									"\n\nPrecio Latam: $%.2f"
+									"\na) Precio con tarjeta de debito: $%.2f"
+									"\nb) Precio con tarjeta de credito: $%.2f"
+									"\nc) Precio pagando con Bitcoin: %f BTC"
+									"\nd) Precio unitario: $%.2f"
+									"\n\n Precio Aerolineas: $%.2f"
+									"\na) Precio con tarjeta de debito: $%.2f"
+									"\nb) Precio con tarjeta de credito: $%.2f"
+									"\nc) Precio pagando con Bitcoin: %f BTC"
+									"\nd) Precio unitario: $%.2f"
+									"\nLa diferencia de precio es: $%.2f\n",kilometrosIngresados, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
+									precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
 							flag_1 = 0;
 							flag_2 = 0;
 							flag_3 = 0;
