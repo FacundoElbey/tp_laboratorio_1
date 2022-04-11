@@ -16,6 +16,6 @@ int calcularPrecioCredito(float, float*);
 int calcularPrecioBitcoin(float,float, float*);
 int calcularPrecioUnitario(float, float, float*);
 int calcularDiferenciaPrecios(float, float, float*);
-
+void informe(float, float, float, float, float, float, float, float, float, float, float, float);
 
 #endif /* FUNCIONES_H_ */

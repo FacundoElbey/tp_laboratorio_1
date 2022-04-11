@@ -90,3 +90,22 @@ int calcularDiferenciaPrecios(float precioAerolineas, float precioLatam, float* 
 	}
 	return retorno;
 }
+
+void informe(float kilometros,float precioLatam, float precioLatamDebito, float precioLatamCredito, float precioLatamBitcoin,
+		float precioLatamUnitario, float precioAerolineas, float precioAerolineasDebito, float precioAerolineasCredito, float precioAerolineasBitcoin,
+		float precioAerolineasUnitario, float diferenciaPrecios)
+{
+	printf("\nKMs Ingresados: %.2f"
+			"\n\nPrecio Latam: $%.2f"
+			"\na) Precio con tarjeta de debito: $%.2f"
+			"\nb) Precio con tarjeta de credito: $%.2f"
+			"\nc) Precio pagando con Bitcoin: %f BTC"
+			"\nd) Precio unitario: $%.2f"
+			"\n\n Precio Aerolineas: $%.2f"
+			"\na) Precio con tarjeta de debito: $%.2f"
+			"\nb) Precio con tarjeta de credito: $%.2f"
+			"\nc) Precio pagando con Bitcoin: %f BTC"
+			"\nd) Precio unitario: $%.2f"
+			"\n\nLa diferencia de precio es: $%.2f\n",kilometros, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
+			precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
+}

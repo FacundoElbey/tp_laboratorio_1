@@ -109,17 +109,7 @@ int main(void) {
 					case 4:
 						if(!flag_3)
 						{
-							printf("\nLatam:"
-									"\na) Precio con tarjeta de debito: $%.2f"
-									"\nb) Precio con tarjeta de credito: $%.2f"
-									"\nc) Precio pagando con Bitcoin: %f BTC"
-									"\nd) Precio unitario: $%.2f"
-									"\nAerolineas:"
-									"\na) Precio con tarjeta de debito: $%.2f"
-									"\nb) Precio con tarjeta de credito: $%.2f"
-									"\nc) Precio pagando con Bitcoin: %f BTC"
-									"\nd) Precio unitario: $%.2f"
-									"\nLa diferencia de precio es: $%.2f\n",precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario,
+							informe(kilometrosIngresados, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
 									precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
 						}
 						else
@@ -137,18 +127,7 @@ int main(void) {
 							!calcularPrecioBitcoin(precioAerolineas, BITCOIN, &precioAerolineasBitcoin) && !calcularPrecioUnitario(kilometrosIngresados, precioLatam, &precioLatamUnitario) &&
 							!calcularPrecioUnitario(kilometrosIngresados, precioAerolineas, &precioAerolineasUnitario) && !calcularDiferenciaPrecios(precioAerolineas, precioLatam, &diferenciaPrecios))
 						{
-							printf("\nKMs Ingresados: %.2f"
-									"\n\nPrecio Latam: $%.2f"
-									"\na) Precio con tarjeta de debito: $%.2f"
-									"\nb) Precio con tarjeta de credito: $%.2f"
-									"\nc) Precio pagando con Bitcoin: %f BTC"
-									"\nd) Precio unitario: $%.2f"
-									"\n\n Precio Aerolineas: $%.2f"
-									"\na) Precio con tarjeta de debito: $%.2f"
-									"\nb) Precio con tarjeta de credito: $%.2f"
-									"\nc) Precio pagando con Bitcoin: %f BTC"
-									"\nd) Precio unitario: $%.2f"
-									"\nLa diferencia de precio es: $%.2f\n",kilometrosIngresados, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
+							informe(kilometrosIngresados, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
 									precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
 							flag_1 = 0;
 							flag_2 = 0;
