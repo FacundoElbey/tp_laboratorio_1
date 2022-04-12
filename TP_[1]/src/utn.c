@@ -1,19 +1,33 @@
 /*
  * utn.c
  *
- *  Created on: 4 abr. 2022
- *      Author: felbey
+ *  Created on: 12 abr. 2022
+ *      Author: river
  */
+
+#ifndef UTN_C_
+#define UTN_C_
+
 #include "utn.h"
+
+static int esNumerica(char* cadena, int limite);
+static int getInt(int* pResultado);
+static int esFlotante(char* cadena);
+static int getFloat(float* pResultado);
+static int getString(char* cadena, int longitud);
+static int esNombre(char* cadena,int longitud);
+static int getNombre(char* pResultado,int longitud);
+
+
 /**
  * \brief 	Lee de stdin hasta que encuentra un '\n' o hasta que haya copiado en cadena
- * 			un maximo de 'longitud - 1' caracteres.
+ * 			un máximo de 'longitud - 1' caracteres.
  * \param pResultado Puntero al espacio de memoria donde se copiara la cadena obtenida
- * \param longitud Define el tamanio de cadena
+ * \param longitud Define el tamaño de cadena
  * \return Retorna 0 (EXITO) si se obtiene una cadena y -1 (ERROR) si no
  *
  */
-int getString(char* cadena, int longitud)
+static int getString(char* cadena, int longitud)
 {
 	int retorno=-1;
 	char bufferString[4096]; // *****************************
@@ -39,9 +53,9 @@ int getString(char* cadena, int longitud)
 
 /**
  * \brief 	Lee de stdin hasta que encuentra un '\n' o hasta que haya copiado en cadena
- * 			un maximo de 'longitud - 1' caracteres.
+ * 			un máximo de 'longitud - 1' caracteres.
  * \param pResultado Puntero al espacio de memoria donde se copiara la cadena obtenida
- * \param longitud Define el tamanio de cadena
+ * \param longitud Define el tamaño de cadena
  * \return Retorna 0 (EXITO) si se obtiene una cadena y -1 (ERROR) si no
  *
  */
@@ -75,7 +89,7 @@ int myGets(char* cadena, int longitud)
  * \return Retorna 0 (EXITO) si se obtiene un numero entero y -1 (ERROR) si no
  *
  */
-int getInt(int* pResultado)
+static int getInt(int* pResultado)
 {
     int retorno=-1;
     char bufferString[50];
@@ -94,7 +108,7 @@ int getInt(int* pResultado)
  * \return Retorna 1 (vardadero) si la cadena es numerica y 0 (falso) si no lo es
  *
  */
-int esNumerica(char* cadena, int limite)
+static int esNumerica(char* cadena, int limite)
 {
 	int retorno = 1; // VERDADERO
 	int i;
@@ -153,7 +167,7 @@ int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo
  * \return Retorna 0 (EXITO) si se obtiene un numero flotante y -1 (ERROR) si no
  *
  */
-int getFloat(float* pResultado)
+static int getFloat(float* pResultado)
 {
     int retorno=-1;
     char buffer[64];
@@ -175,7 +189,7 @@ int getFloat(float* pResultado)
  * \return Retorna 1 (vardadero) si la cadena es flotante y 0 (falso) si no lo es
  *
  */
-int esFlotante(char* cadena)
+static int esFlotante(char* cadena)
 {
 	int i=0;
 	int retorno = 1;
@@ -244,7 +258,7 @@ int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError, 
  * \return Retorna 0 (EXITO) si se obtiene un numero flotante y -1 (ERROR) si no
  *
  */
-int getNombre(char* pResultado, int longitud)
+static int getNombre(char* pResultado, int longitud)
 {
     int retorno=-1;
     char buffer[4096];
@@ -268,7 +282,7 @@ int getNombre(char* pResultado, int longitud)
  * \return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
  *
  */
-int esNombre(char* cadena,int longitud)
+static int esNombre(char* cadena,int longitud)
 {
 	int i=0;
 	int retorno = 1;
@@ -315,11 +329,12 @@ int utn_getNombre(char* pResultado, int longitud,char* mensaje, char* mensajeErr
 	}
 	return retorno;
 }
+
 /// \fn int PedirEntero(char[])
 /// \brief
 ///
 /// \param mensaje Mensaje que se va mostrar al pedir el dato
-/// \return retorna el n�mero entero que es ingresado
+/// \return retorna el n�mero entero que es ingresado
 int PedirEntero (char mensaje[])
 {
     int numeroIngresado;
@@ -330,51 +345,4 @@ int PedirEntero (char mensaje[])
     return numeroIngresado;
 }
 
-/// \fn float PedirFloat(char[])
-/// \brief
-///
-/// \param mensaje Mensaje que se va mostrar al pedir el dato
-/// \return retorna el n�mero flotante que es ingresado
-float PedirFloat (char mensaje[])
-{
-    float numeroIngresado;
-
-    printf("%s \n", mensaje);
-    scanf("%f",&numeroIngresado);
-
-    return numeroIngresado;
-}
-
-/// \fn int PedirString(char[], char[])
-/// \brief
-///
-/// \param stringIngresado la cadena a la cual le vamos a asignar el valor
-/// \return
-int PedirString (char mensaje[], char stringIngresado[])//Para las horas y sueldo y chequear que son n�meros.
-{
-	int retorno = 0;
-    printf("%s \n", mensaje);
-    fflush(stdin);
-    scanf("%[^\n]", stringIngresado);
-    esNumerica(stringIngresado, 100);
-    return retorno;
-}
-
-/**
- * \brief Verifica si el valor recibido contiene solo letras
- * \param str Array con la cadena a ser analizada
- * \return 1 si contiene solo ' ' y letras y 0 si no lo es
- *
- */
-int esSoloLetras(char str[])
-{
-   int i=0;
-   while(str[i] != '\0')
-   {
-       if((str[i] != ' ') && (str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
-           return 0;
-       i++;
-   }
-   return 1;
-}
-
+#endif /* UTN_C_ */

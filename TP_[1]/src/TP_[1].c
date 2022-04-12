@@ -2,8 +2,8 @@
  ============================================================================
  Name        : TP_[1].c
  Author      : Elbey Facundo
- Description : Una agencia de viaje necesita calcular costos para sus vuelos de Latam y AerolÌneas Argentinas para ofrecerlos a sus clientes.
- Se deber· ingresar por cada vuelo los km totales y el precio total del mismo. El objetivo de la aplicaciÛn es mostrar las diferentes opciones
+ Description : Una agencia de viaje necesita calcular costos para sus vuelos de Latam y Aerol√≠neas Argentinas para ofrecerlos a sus clientes.
+ Se deber√° ingresar por cada vuelo los km totales y el precio total del mismo. El objetivo de la aplicaci√≥n es mostrar las diferentes opciones
  de pagos a sus clientes.
  ============================================================================
  */
@@ -16,7 +16,7 @@
 
 int main(void) {
 
-	setbuf(stdout, NULL);
+    setbuf(stdout, NULL);
     int opcion;
     float kilometrosIngresados;
     float precioAerolineas;
@@ -43,7 +43,7 @@ int main(void) {
     do
     {
     	menu(kilometrosIngresados, precioAerolineas, precioLatam);
-		if(!utn_getNumero(&opcion,"\nIngrese una opciÛn: ","\nOpcion invalida, reintente: ",1,6,4)){
+		if(!utn_getNumero(&opcion,"\nIngrese una opci√≥n: ","\nOpcion invalida, reintente: ",1,6,4)){
 			switch(opcion)
 			{
 				case 1:

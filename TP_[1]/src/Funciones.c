@@ -101,7 +101,7 @@ void informe(float kilometros,float precioLatam, float precioLatamDebito, float 
 			"\nb) Precio con tarjeta de credito: $%.2f"
 			"\nc) Precio pagando con Bitcoin: %f BTC"
 			"\nd) Precio unitario: $%.2f"
-			"\n\n Precio Aerolineas: $%.2f"
+			"\n\nPrecio Aerolineas: $%.2f"
 			"\na) Precio con tarjeta de debito: $%.2f"
 			"\nb) Precio con tarjeta de credito: $%.2f"
 			"\nc) Precio pagando con Bitcoin: %f BTC"
