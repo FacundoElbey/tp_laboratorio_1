@@ -35,109 +35,88 @@ int main(void) {
     int flag_3;
 
     kilometrosIngresados = 0;
+    precioAerolineas = 0;
+	precioLatam = 0;
     flag_1 = 1;
     flag_2 = 1;
     flag_3 = 1;
     do
     {
-			printf("\n1. Ingresar kilometros: (km = %.2f)", kilometrosIngresados);
-			printf("\n2. Ingresar precio de vuelos"
-					"\n- Precio vuelo Aerolineas: %.2f"
-					"\n- Precio vuelo Latam: %.2f", precioAerolineas, precioLatam);
-			printf("\n3. Calcular todos los costos:"
-					"\na) Tarjeta de debito (descuento 10)"
-					"\nb) Tarjeta de credito (interes 25)"
-					"\nc) Bitcoin (1BTC -> 4606954.55 Pesos Argentinos)"
-					"\nd) Mostrar precio por km (precio unitario)"
-					"\ne) Mostrar diferencia de precio ingresada (Latam - Aerolineas)");
-			printf("\n4. Informar resultados"
-					"\nLatam:"
-					"\na) Precio con tarjeta de debito: "
-					"\nb) Precio con tarjeta de credito: "
-					"\nc) Precio pagando con Bitcoin: "
-					"\nd) Precio unitario: "
-					"\nAerolineas:"
-					"\na) Precio con tarjeta de debito: "
-					"\nb) Precio con tarjeta de credito: "
-					"\nc) Precio pagando con Bitcoin: "
-					"\nd) Precio unitario: "
-					"\nLa diferencia de precio es: ");
-			printf("\n5. Carga forzada de datos.");
-			printf("\n6. Salir.");
-			if(!utn_getNumero(&opcion,"\nIngrese una opción: ","\nOpcion invalida, reintente: ",1,6,4)){
-				switch(opcion)
-				{
-					case 1:
-						if(utn_getNumeroFlotante(&kilometrosIngresados, "\nIngrese los kilometros: ","\nRANGO INVALIDO!!!\nReingrese los kilometros: ",0,99999999,5) != 0)
+    	menu(kilometrosIngresados, precioAerolineas, precioLatam);
+		if(!utn_getNumero(&opcion,"\nIngrese una opción: ","\nOpcion invalida, reintente: ",1,6,4)){
+			switch(opcion)
+			{
+				case 1:
+					if(utn_getNumeroFlotante(&kilometrosIngresados, "\nIngrese los kilometros: ","\nRANGO INVALIDO!!!\nReingrese los kilometros: ",0,99999999,5) != 0)
+					{
+						printf("\nSe produjo un error en la carga de los kilometros. Reinicie le programa.");
+						break;
+					}
+					flag_1 = 0;
+					break;
+
+				case 2:
+					if(!utn_getNumeroFlotante(&precioAerolineas,"\nIngrese el precio del vuelo en Aerolineas: ","\nERROR, reingrese el precio: ",0,99999999,5))
+					{
+						if(utn_getNumeroFlotante(&precioLatam,"\nIngrese el precio del vuelo en Latam: ","\nERROR, reingrese el precio: ",0,99999999,5) != 0)
 						{
-							printf("\nSe produjo un error en la carga de los kilometros. Reinicie le programa.");
+							printf("\nSe produjo un error en la carga de los precios. Reinicie le programa.");
 							break;
 						}
-						flag_1 = 0;
-						break;
+					}
+					flag_2 = 0;
+					break;
 
-					case 2:
-						if(!utn_getNumeroFlotante(&precioAerolineas,"\nIngrese el precio del vuelo en Aerolineas: ","\nERROR, reingrese el precio: ",0,99999999,5))
-						{
-							if(utn_getNumeroFlotante(&precioLatam,"\nIngrese el precio del vuelo en Latam: ","\nERROR, reingrese el precio: ",0,99999999,5) != 0)
-							{
-								printf("\nSe produjo un error en la carga de los precios. Reinicie le programa.");
-								break;
-							}
-						}
-						flag_2 = 0;
-						break;
+				case 3:
 
-					case 3:
-
-						if(!flag_1 && !flag_2)
-						{
-							if (!calcularPrecioDebito(precioLatam, &precioLatamDebito) && !calcularPrecioDebito(precioAerolineas, &precioAerolineasDebito) && !calcularPrecioCredito(precioLatam, &precioLatamCredito)
-								&& !calcularPrecioCredito(precioAerolineas, &precioAerolineasCredito) && !calcularPrecioBitcoin(precioLatam, BITCOIN, &precioLatamBitcoin) &&
-								!calcularPrecioBitcoin(precioAerolineas, BITCOIN, &precioAerolineasBitcoin) && !calcularPrecioUnitario(kilometrosIngresados, precioLatam, &precioLatamUnitario) &&
-								!calcularPrecioUnitario(kilometrosIngresados, precioAerolineas, &precioAerolineasUnitario) && !calcularDiferenciaPrecios(precioAerolineas, precioLatam, &diferenciaPrecios))
-							{
-								printf("\nSe realizo con exito el calculo de los costos!!\n");
-								flag_3 = 0;
-							}
-						}
-						else
-						{
-							printf("\nAntes de realizar el calculo de los costos, ingrese el valor de los vuelos y los kilometros!!\n");
-						}
-						break;
-					case 4:
-						if(!flag_3)
-						{
-							informe(kilometrosIngresados, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
-									precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
-						}
-						else
-						{
-							printf("\nAntes de informar los costos, debe calcularlos con la opcion 3!\n");
-						}
-						break;
-
-					case 5:
-						kilometrosIngresados = 7090;
-						precioAerolineas = 1335000.66;
-						precioLatam = 1350000.76;
+					if(!flag_1 && !flag_2)
+					{
 						if (!calcularPrecioDebito(precioLatam, &precioLatamDebito) && !calcularPrecioDebito(precioAerolineas, &precioAerolineasDebito) && !calcularPrecioCredito(precioLatam, &precioLatamCredito)
 							&& !calcularPrecioCredito(precioAerolineas, &precioAerolineasCredito) && !calcularPrecioBitcoin(precioLatam, BITCOIN, &precioLatamBitcoin) &&
 							!calcularPrecioBitcoin(precioAerolineas, BITCOIN, &precioAerolineasBitcoin) && !calcularPrecioUnitario(kilometrosIngresados, precioLatam, &precioLatamUnitario) &&
 							!calcularPrecioUnitario(kilometrosIngresados, precioAerolineas, &precioAerolineasUnitario) && !calcularDiferenciaPrecios(precioAerolineas, precioLatam, &diferenciaPrecios))
 						{
-							informe(kilometrosIngresados, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
-									precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
-							flag_1 = 0;
-							flag_2 = 0;
+							printf("\nSe realizo con exito el calculo de los costos!!\n");
 							flag_3 = 0;
 						}
-						break;
-					case 6:
-						break;
-				}
+					}
+					else
+					{
+						printf("\nAntes de realizar el calculo de los costos, ingrese el valor de los vuelos y los kilometros!!\n");
+					}
+					break;
+				case 4:
+					if(!flag_3)
+					{
+						informe(kilometrosIngresados, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
+								precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
+					}
+					else
+					{
+						printf("\nAntes de informar los costos, debe calcularlos con la opcion 3!\n");
+					}
+					break;
+
+				case 5:
+					kilometrosIngresados = 7090;
+					precioAerolineas = 1335000.66;
+					precioLatam = 1350000.76;
+					if (!calcularPrecioDebito(precioLatam, &precioLatamDebito) && !calcularPrecioDebito(precioAerolineas, &precioAerolineasDebito) && !calcularPrecioCredito(precioLatam, &precioLatamCredito)
+						&& !calcularPrecioCredito(precioAerolineas, &precioAerolineasCredito) && !calcularPrecioBitcoin(precioLatam, BITCOIN, &precioLatamBitcoin) &&
+						!calcularPrecioBitcoin(precioAerolineas, BITCOIN, &precioAerolineasBitcoin) && !calcularPrecioUnitario(kilometrosIngresados, precioLatam, &precioLatamUnitario) &&
+						!calcularPrecioUnitario(kilometrosIngresados, precioAerolineas, &precioAerolineasUnitario) && !calcularDiferenciaPrecios(precioAerolineas, precioLatam, &diferenciaPrecios))
+					{
+						informe(kilometrosIngresados, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
+								precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
+						flag_1 = 0;
+						flag_2 = 0;
+						flag_3 = 0;
+					}
+					break;
+				case 6:
+					break;
 			}
+		}
     } while (opcion != 6);
 
 	return EXIT_SUCCESS;

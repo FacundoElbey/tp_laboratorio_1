@@ -109,3 +109,31 @@ void informe(float kilometros,float precioLatam, float precioLatamDebito, float 
 			"\n\nLa diferencia de precio es: $%.2f\n",kilometros, precioLatam,precioLatamDebito, precioLatamCredito, precioLatamBitcoin, precioLatamUnitario, precioAerolineas,
 			precioAerolineasDebito, precioAerolineasCredito, precioAerolineasBitcoin, precioAerolineasUnitario, diferenciaPrecios);
 }
+
+void menu (float kilometros, float precioAerolineas, float precioLatam)
+{
+	printf("\n1. Ingresar kilometros: (km = %.2f)", kilometros);
+	printf("\n2. Ingresar precio de vuelos"
+			"\n- Precio vuelo Aerolineas: %.2f"
+			"\n- Precio vuelo Latam: %.2f", precioAerolineas, precioLatam);
+	printf("\n3. Calcular todos los costos:"
+			"\na) Tarjeta de debito (descuento 10)"
+			"\nb) Tarjeta de credito (interes 25)"
+			"\nc) Bitcoin (1BTC -> 4606954.55 Pesos Argentinos)"
+			"\nd) Mostrar precio por km (precio unitario)"
+			"\ne) Mostrar diferencia de precio ingresada (Latam - Aerolineas)");
+	printf("\n4. Informar resultados"
+			"\nLatam:"
+			"\na) Precio con tarjeta de debito: "
+			"\nb) Precio con tarjeta de credito: "
+			"\nc) Precio pagando con Bitcoin: "
+			"\nd) Precio unitario: "
+			"\nAerolineas:"
+			"\na) Precio con tarjeta de debito: "
+			"\nb) Precio con tarjeta de credito: "
+			"\nc) Precio pagando con Bitcoin: "
+			"\nd) Precio unitario: "
+			"\nLa diferencia de precio es: ");
+	printf("\n5. Carga forzada de datos.");
+	printf("\n6. Salir.");
+}

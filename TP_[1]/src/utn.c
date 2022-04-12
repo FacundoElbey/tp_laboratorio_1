@@ -348,7 +348,6 @@ float PedirFloat (char mensaje[])
 /// \fn int PedirString(char[], char[])
 /// \brief
 ///
-/// \param mensaje Mensaje que se va mostrar al pedir el dato
 /// \param stringIngresado la cadena a la cual le vamos a asignar el valor
 /// \return
 int PedirString (char mensaje[], char stringIngresado[])//Para las horas y sueldo y chequear que son n�meros.
