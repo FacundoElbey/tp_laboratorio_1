@@ -37,6 +37,10 @@ int main(void) {
 							printf("\nSe dio de alta al pasajero de manera correcta.\n");
 							flagAlta = 0;
 						}
+						else
+						{
+							printf("\nSe produjo un error en la carga.\n");
+						}
 					break;
 				case 2:
 					if(!flagAlta)

@@ -25,7 +25,8 @@ int utn_getNombre(char*, int,char*, char*, int);
 int myGets(char* cadena, int longitud);
 int PedirEntero (char mensaje[]);
 float PedirFloat (char mensaje[]);
-int PedirString (char mensaje[], char stringIngresado[]);
+int PedirString (char mensaje[], char stringIngresado[], int reintentos);
+int validarCodigoVuelo(char cadena[]);
 int esSoloLetras(char str[]);
 void menu();
 

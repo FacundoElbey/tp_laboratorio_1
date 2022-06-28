@@ -353,16 +353,39 @@ float PedirFloat (char mensaje[])
 /// \param mensaje Mensaje que se va mostrar al pedir el dato
 /// \param stringIngresado la cadena a la cual le vamos a asignar el valor
 /// \return
-int PedirString (char mensaje[], char stringIngresado[])//Para las horas y sueldo y chequear que son n�meros.
+int PedirString (char mensaje[], char stringIngresado[], int reintentos)
 {
-	int retorno = 0;
-    printf("%s", mensaje);
-    fflush(stdin);
-    scanf("%[^\n]", stringIngresado);
-    esNumerica(stringIngresado, 100);
+	int retorno = 1;
+
+	while(reintentos>=0)
+	{
+		reintentos--;
+		printf("%s", mensaje);
+		fflush(stdin);
+		scanf("%[^\n]", stringIngresado);
+		if(validarCodigoVuelo(stringIngresado))
+		{
+			retorno = 0;
+			break;
+		}
+	}
     return retorno;
 }
 
+int validarCodigoVuelo(char cadena[])
+{
+	int retorno = 1;
+	int i;
+	for(i=0; cadena[i] != '\0';i++)
+	{
+		if(cadena[i] < '0' || (cadena[i] > '9' && cadena[i] < 'A') || (cadena[i] > 'Z' && cadena[i] < 'a') || cadena[i] > 'z')
+		{
+			retorno = 0;
+			break;
+		}
+	}
+	return retorno;
+}
 /**
  * \brief Verifica si el valor recibido contiene solo letras
  * \param str Array con la cadena a ser analizada

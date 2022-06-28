@@ -96,12 +96,14 @@ int uploadPassenger(Passenger list[], int len)
 			if(!utn_getNombre(list[indice].name, NOMBRE_LEN,"\nIngrese su nombre: ","\n¡Error!\n",3) &&
 			!utn_getNombre(list[indice].lastName, NOMBRE_LEN,"\nIngrese su apellido: ","\n¡Error!\n",3) &&
 			!utn_getNumeroFlotante(&list[indice].price,"\nIngrese el precio del vuelo: ","\n¡Error!\n",1,9999999,3) &&
-			!utn_getNumero(&list[indice].typePassenger,"\nIngrese que tipo de pasajero es(1 para Primera Clase o 2 para Clase Turista): ","\n¡Error!\n",1,2,6) &&
-			!PedirString("\nIngrese el codigo de vuelo: ", list[indice].flycode))
+			!utn_getNumero(&list[indice].typePassenger,"\nIngrese que tipo de pasajero es (1-Primera Clase o 2-Clase Turista): ","\n¡Error!\n",1,2,6) &&
+			!PedirString("\nIngrese el codigo de vuelo: ", list[indice].flycode,3))
 			{
 			    list[indice].id = obtenerID();
-			    addPassenger(list, len, list->id, list->name, list->lastName, list->price, list->typePassenger, list->flycode);
-	            retorno = 0;
+			    if(!addPassenger(list, len, list->id, list->name, list->lastName, list->price, list->typePassenger, list->flycode))
+			    {
+			    	retorno = 0;
+			    }
 			}
 		}
 		return retorno;
@@ -115,7 +117,7 @@ int printOnePassenger (Passenger* list)
 	if(list != NULL && list->isEmpty == FALSE)
 	{
 		retorno = 0;
-		printf("\nID: %d - NOMBRE: %s - APELLIDO: %s - PRECIO VUELO: $%.2f - TIPO DE PASAJERO: %d - CODIGO DE VUELO: %s - ESTADO DE VUELO: %d", list->id, list->name, list->lastName, list->price, list->typePassenger, list->flycode, list->statusFlight);
+		printf("\n|%-4d|%-10s|%-10s|$%-8.2f|%-20d|%-15s|%-15d|", list->id, list->name, list->lastName, list->price, list->typePassenger, list->flycode, list->statusFlight);
 	}
 	return retorno;
 }
@@ -123,7 +125,9 @@ int printOnePassenger (Passenger* list)
 int printPassenger(Passenger* list, int len)
 {
 	int retorno = -1;
-
+	printf("\n--------------------------------------------------------------------------------------------\n");
+	printf("|%-4s|%-10s|%-10s|%-10s|%-20s|%-15s|%-15s|","ID","NOMBRE","APELLIDO","PRECIO","TIPO DE PASAJERO","CODIGO DE VUELO","ESTADO DE VUELO");
+	printf("\n--------------------------------------------------------------------------------------------");
 	for (int i=0; i<len;i++)
 	{
 		if(list[i].isEmpty == FALSE)
@@ -132,7 +136,7 @@ int printPassenger(Passenger* list, int len)
 			retorno = 0;
 		}
 	}
-
+	printf("\n--------------------------------------------------------------------------------------------\n");
 	return retorno;
 }
 
@@ -197,7 +201,7 @@ int modificarPasajero(Passenger list[], int len)
 							}
 							break;
 						case 5:
-							if(!PedirString("\nIngrese el codigo de vuelo: ", list[i].flycode))
+							if(!PedirString("\nIngrese el codigo de vuelo: ", list[i].flycode,3))
 							{
 								printf("\nSe cambio el codigo de vuelo correctamente");
 							}
